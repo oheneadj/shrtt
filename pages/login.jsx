@@ -1,7 +1,55 @@
-import React from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import axios from "axios";
+import React, { useState } from "react";
+
+
+// const validate = ({ data }) => {
+//   const router = useRouter()
+//   useEffect(() => {
+//       if (data) {
+//           return router.push(data.longUrl)
+//       }
+//   }, [])
+// };
+
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const credentials = { email, password };
+
+
+    const user = await axios.post("/api/auth/login", credentials);
+
+    console.log(user);
+
+    if(user){
+      return router.push("/dashboard")
+    }
+
+    console.log("login error")
+  };
+
+  const handleGetUser = async () => {
+    const user = await axios.get("/api/user");
+
+    console.log(user);
+  };
+
+  const handleLogOut = async () => {
+    const user = await axios.get("/api/auth/logout");
+
+    console.log(user);
+  };
+
+
   return (
     <div className="bg-blue-100 h-screen">
 
@@ -31,6 +79,7 @@ const Login = () => {
 
               <hr className="w-full bg-gray-400" />
             </div>
+            <form onSubmit={(e) => handleSubmit(e)}>
             <div>
               <label
                 id="email"
@@ -40,7 +89,10 @@ const Login = () => {
               </label>
               <input
                 aria-labelledby="email"
-                type="email"
+                type="text"
+                name="email"
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
               />
             </div>
@@ -53,8 +105,10 @@ const Login = () => {
               </label>
               <div className="relative flex items-center justify-center">
                 <input
-                  id="pass"
                   type="password"
+                  name="password"
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                 />
                 <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
@@ -81,6 +135,7 @@ const Login = () => {
                 Login to my account
               </button>
             </div>
+            </form>
           </div>
         </div>
       </div>

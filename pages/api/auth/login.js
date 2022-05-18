@@ -3,6 +3,7 @@ import User from "../../../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import {generateToken} from "../../../libs/auth"
+import { serialize } from "cookie";
 
 
 export default async function handler(req, res) {
@@ -24,7 +25,18 @@ export default async function handler(req, res) {
     const user = await User.findOne({ email: email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-        return  res.status(201).json({ 
+      
+      const serialised = serialize("OursiteJWT", generateToken(user.id), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+        maxAge: 60 * 60 * 24 * 30,
+        
+      });
+  
+      res.setHeader("Set-Cookie", serialised);       
+      
+      return  res.status(201).json({ 
         _id:user.id,
         name:user.name,
         email:user.email,
