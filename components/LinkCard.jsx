@@ -1,17 +1,21 @@
 import React from "react";
 import Link from "next/link";
 
-const LinkCard = () => {
+const LinkCard = (
+{  urlName,
+  longUrl,
+  shortUrl,
+  visited}) => {
   return (
           <div className="bg-white shadow rounded lg:w-2/4  md:w-2/2 w-full mt-10 p-5">
             <p className="focus:outline-none text-md font-extrabold leading-6 text-gray-800">
-              NextJs- 
+             {urlName}
             </p>
             <p
               tabindex="0"
               className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500"
             >
-              https://tailwindcss.com/docs/margin#add-margin-to-a-single-side{" "}
+              {longUrl}{" "}
 
             </p>
 
@@ -19,13 +23,14 @@ const LinkCard = () => {
               <hr className="w-full bg-gray-400" />
 
             </div>
-            <p
+          <a href={shortUrl}
+              target="_blank"
               tabindex="0"
               className="focus:outline-none text-sm font-medium leading-none hover:text-blue-500 text-red-500"
             >
-              http://localhost:3000/rPxhZfz{" "}
+          {shortUrl}{" "}
               
-            </p>
+            </a>
             <div className="flex flex-row items-center justify-between">
               <div className="text-gray-500 flex flex-row items-center justify-between">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy hover:text-blue-500 text-gray-500 mr-3 mt-3"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -53,7 +58,7 @@ const LinkCard = () => {
                 role="button"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 px-4 py-3 w-full"
               >
-                7 Clicks
+               {visited} Clicks 
               </button>
                 </div>
               </div>
