@@ -18,7 +18,7 @@ const Register = () => {
           >
             Already have an account?{" "}
             <Link
-              className="text-blue-100 hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"
+              className="text-blue-100 hover:text-gray-500 hover:text-gray-500 hover:outline-none hover:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"
               href="/login"
             >
               Login here

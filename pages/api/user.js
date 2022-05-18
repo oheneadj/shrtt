@@ -1,8 +1,8 @@
-import dbConnect from "../../../libs/dbConnect";
-import User from "../../../models/user.model";
+import dbConnect from "../../libs/dbConnect";
+import User from "../../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
-import {generateToken} from "../../../libs/auth"
+import {generateToken} from "../../libs/auth"
 
 export default async function handler(req, res) {
   console.log("handler")

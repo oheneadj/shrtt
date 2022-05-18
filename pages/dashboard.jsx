@@ -6,6 +6,7 @@ import Footer from "../components/Footer"
 
 const Login = () => {
   return (
+    
     <div className="bg-blue-100 h-full">
       <div className="flex flex-col items-center justify-center">
       <CreateLink/>   
