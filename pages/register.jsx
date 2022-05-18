@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 import Link from "next/link";
 
+
+
 const Register = () => {
+
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const credentials = { name, email, password };
+
+
+    let user = await axios.post("/api/auth/register", credentials);
+
+
+    if(user){
+
+      return router.push("/login")
+    }
+
+    console.log("login error")
+  };
+
+
   return (
     <div className="bg-blue-100">
     <div >
@@ -29,18 +57,22 @@ const Register = () => {
 
             <hr className="w-full bg-gray-400" />
           </div>
+          <form onSubmit={(e) => handleSubmit(e)}>
           <div>
             <label
-              id="email"
+              id="name"
               className="text-sm font-medium leading-none text-gray-800"
             >
               Name
             </label>
             <input
-              aria-labelledby="name"
-              type="text"
-              className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-            />
+                aria-labelledby="name"
+                type="text"
+                name="name"
+                id="name"
+                onChange={(e) => setName(e.target.value)}
+                className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+              />
           </div>
           <div className="mt-6  w-full">
             <label
@@ -50,10 +82,13 @@ const Register = () => {
               Email
             </label>
             <input
-              aria-labelledby="email"
-              type="email"
-              className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-            />
+                aria-labelledby="email"
+                type="email"
+                name="email"
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+              />
           </div>
           <div className="mt-6  w-full">
             <label
@@ -63,11 +98,13 @@ const Register = () => {
               Password
             </label>
             <div className="relative flex items-center justify-center">
-              <input
-                id="pass"
-                type="password"
-                className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-              />
+            <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                />
               <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
                 <svg
                   width="16"
@@ -92,6 +129,7 @@ const Register = () => {
               Create my account
             </button>
           </div>
+          </form>
         </div>
       </div>
     </div>

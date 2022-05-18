@@ -26,28 +26,30 @@ const Login = () => {
     const credentials = { email, password };
 
 
-    const user = await axios.post("/api/auth/login", credentials);
+    let user = await axios.post("/api/auth/login", credentials);
 
-    console.log(user);
+
 
     if(user){
+
+      localStorage.setItem('user', JSON.stringify(user.data));
       return router.push("/dashboard")
     }
 
     console.log("login error")
   };
 
-  const handleGetUser = async () => {
-    const user = await axios.get("/api/user");
+  // const handleGetUser = async () => {
+  //   const user = await axios.get("/api/user");
 
-    console.log(user);
-  };
+  //   console.log(user);
+  // };
 
-  const handleLogOut = async () => {
-    const user = await axios.get("/api/auth/logout");
+  // const handleLogOut = async () => {
+  //   const user = await axios.get("/api/auth/logout");
 
-    console.log(user);
-  };
+  //   console.log(user);
+  // };
 
 
   return (
@@ -89,7 +91,7 @@ const Login = () => {
               </label>
               <input
                 aria-labelledby="email"
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 onChange={(e) => setEmail(e.target.value)}

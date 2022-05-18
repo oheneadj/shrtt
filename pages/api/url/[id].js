@@ -23,7 +23,6 @@ if(req.method === "GET"){
         res.status(201).json(shortUrl)
     //Delete a short URL
     }
-
     else{
         res.json({msg:`${req.method} is not an accepted method`})
     }

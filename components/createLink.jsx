@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
-const CreateLink = () => {
+
+const CreateLink = ({handleCreateLink}) => {
+
+
+  const [longUrl, setLongUrl] = useState("");
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const credentials = { email, password };
+
+
+    let user = await axios.post("/api/auth/login", credentials);
+
+
+
+    if(user){
+
+      localStorage.setItem('user', JSON.stringify(user.data));
+      return router.push("/dashboard")
+    }
+
+    console.log("login error")
+  };
+
+
+
   return (
           <div className="bg-white shadow rounded lg:w-2/3  md:w-2/2 w-full px-6 m-20">
             <div className="my-5 w-full">
+            <form onSubmit={(e) => handleSubmit(e)}>
               <div className="relative flex items-center justify-center">
                 <input
                   id="pass"
@@ -20,6 +48,7 @@ const CreateLink = () => {
               </button>
                 </div>
               </div>
+              </form>
             </div>
           </div>
   );
