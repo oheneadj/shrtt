@@ -10,11 +10,11 @@ const navigation = [
 const Navbar = () => {
   return (
 <div>
-<div className="flex flex-row items-center justify-between px-6 py-4">
+<div className="flex flex-row items-center justify-between px-12 py-4">
 
 {/* Logo */}
 <div>
-  <img className="w-24" src="https://cdn.dribbble.com/users/68544/screenshots/14723926/media/93d9b3e92d5425189b06fe08c6746747.png?compress=1&resize=400x300&vertical=top" alt="Linkly Logo" />
+  <img className="w-10" src="/logo.png" alt="Linkly Logo" />
 </div>
 
 {/* Links */}

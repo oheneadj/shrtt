@@ -3,6 +3,7 @@ import User from "../../../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import {generateToken} from "../../../libs/auth"
+// import { serialize } from "cookie";
 
 
 export default async function handler(req, res) {
@@ -23,8 +24,9 @@ export default async function handler(req, res) {
     // Check for user email
     const user = await User.findOne({ email: email });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-        return  res.status(201).json({ 
+    if (user && (await bcrypt.compare(password, user.password))) {             
+
+      return  res.status(200).json({ 
         _id:user.id,
         name:user.name,
         email:user.email,

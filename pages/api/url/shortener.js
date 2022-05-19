@@ -47,7 +47,7 @@ export default async function handler(req, res) {
               date: new Date()
             })
 
-              res.status(201).json({ url });
+              return res.status(201).json({ url });
             }
           } catch (error) {
             console.error(error);

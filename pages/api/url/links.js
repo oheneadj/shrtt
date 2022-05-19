@@ -9,18 +9,12 @@ export default async function handler(req, res) {
 
 if(req.method === "GET"){
 
-      let urlCode = req.query.id;
 
-      let shortUrl = await URL.findOne({urlCode:urlCode});
+      let links = await URL.find({});
 
-              if(urlCode === null) return res.status(404).json({msg: "No URL found"})
+      console.log(links)
 
-             console.log(`This is ${shortUrl}`)
-             shortUrl.visited++;
-
-            shortUrl.save();
-
-        res.status(201).json(shortUrl)
+        res.status(201).json(links)
     //Delete a short URL
     }
     else{
