@@ -49,9 +49,29 @@ const Dashboard = () => {
     }
   }
 
-  const handleSearchLink = async (e)=>{
-    setSearchLink(e.target.value)
-  }
+  
+  const deleteLink = async (_id) => {
+
+    try{
+      const credentials = { _id };
+
+      let allLinks = await axios.delete("/api/url/links", credentials);
+  
+      if(allLinks){
+        setLinks(allLinks.data)
+        
+        console.log(allLinks.data)
+        alert(`Link deleted successfully`);
+  
+      const newLinks = links.filter((link) => link._id !== _id);
+      setLinks(newLinks);
+    }}
+    catch{
+      console.log(error)
+    }
+
+	};
+
 
   return (
     <div className="bg-blue-100 h-full">
@@ -106,6 +126,7 @@ const Dashboard = () => {
           links={links.filter((link) =>
 						link.longUrl.toLowerCase().includes(searchLink)
 					)}
+          handleDeleteLink={deleteLink}
          />
 
 

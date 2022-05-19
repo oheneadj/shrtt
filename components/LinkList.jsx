@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import LinkCard from "../components/LinkCard"
 
-const LinkList = ({ links}) => {
+const LinkList = ({ links, handleDeleteLink}) => {
 
     const handleCopyLink = e => {
       navigator.clipboard.writeText(shortUrl);
@@ -15,12 +15,13 @@ const LinkList = ({ links}) => {
     {links.map(link => 
 
         <LinkCard
-id={link._id}
-          urlName={link.urlName}
-          longUrl={link.longUrl}
-          shortUrl={link.shortUrl}
-visited={link.visited}
-          // handleDeleteNote={handleDeleteNote}
+            _id={link._id}
+            urlName={link.urlName}
+            longUrl={link.longUrl}
+            shortUrl={link.shortUrl}
+            visited={link.visited}
+
+            handleDeleteLink={handleDeleteLink}
       />
   )}   
   </>  
