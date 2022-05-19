@@ -10,8 +10,6 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     let links = await URL.find({});
 
-    console.log(links);
-
     res.status(201).json(links);
   } else {
     res.json({ msg: `${req.method} is not an accepted method` });

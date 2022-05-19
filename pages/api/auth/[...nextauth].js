@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "../../../libs/dbConnect";
 import User from "../../../models/user.model";
+import bcrypt from "bcrypt";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -17,12 +18,9 @@ export default NextAuth({
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        console.log(credentials, req);
-
-        return null;
-
+      async authorize(credentials) {
         await dbConnect();
+
         const user = await User.findOne({ email: credentials.email });
 
         if (!user) return null;
@@ -31,36 +29,42 @@ export default NextAuth({
           credentials.password,
           user.password
         );
-        if (!checkPassword) return null;
 
-        if (res.ok && user) {
-          // If no error and we have user data, return it
-          return user;
-        }
-        // Return null if user data could not be retrieved
-        return null;
+        if (!checkPassword) return null;
+        console.log(user);
+        return user;
       },
     }),
   ],
 
   callbacks: {
-    jwt: {
-      // Defaults to `session.maxAge`.
-      maxAge: 60 * 60 * 24 * 30,
-      // You can define your own encode/decode functions for signing and encryption
-      async encode() {},
-      async decode() {},
-    },
-    session: {
-      // Seconds - How long until an idle session expires and is no longer valid.
-      maxAge: 30 * 24 * 60 * 60, // 30 days
+    async jwt({ token, user }) {
+      if (token && user) {
+        token.id = user._id;
+        token.name = user.name;
+        token.email = user.email;
+      }
 
-      // Seconds - Throttle how frequently to write to database to extend a session.
-      // Use it to limit write operations. Set to 0 to always update the database.
-      // Note: This option is ignored if using JSON Web Tokens
-      updateAge: 24 * 60 * 60, // 24 hours
+      return token;
+    },
+    async session({ session, token }) {
+      if (session && token) {
+        session.id = token.id;
+        session.name = token.name;
+        session.email = token.email;
+      }
+
+      return session;
     },
   },
-
   secret: "secret",
+
+  pages: {
+    signIn: "/login",
+    newUser: "/dashboard",
+  },
+  jwt: {
+    secret: "secret",
+    encrypt: true,
+  },
 });

@@ -3,12 +3,19 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import LinkList from "../components/LinkList";
 import Footer from "../components/Footer";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import LinkCard from "../components/LinkCard";
+import Navbar from "../components/Navbar/Navbar";
 
 const Dashboard = () => {
   const [longUrl, setLongUrl] = useState("");
   const [links, setLinks] = useState([]);
   const [searchLink, setSearchLink] = useState("");
   const [visited, setVisited] = useState("");
+  const { data: session, status } = useSession();
+
+  console.log(session);
 
   useEffect(() => {
     const getLink = async () => {
@@ -19,7 +26,7 @@ const Dashboard = () => {
 
         // console.log(setLinks);
 
-        console.log(links);
+        // console.log(links);
       }
 
       console.log("login error");
@@ -55,10 +62,10 @@ const Dashboard = () => {
         },
       });
 
-      console.log(allLinks);
+      // console.log(allLinks);
 
       if (allLinks.status === 201) {
-        console.log(allLinks.data);
+        // console.log(allLinks.data);
         alert(`Link deleted successfully`);
 
         const newLinks = links.filter((link) => link._id !== _id);
@@ -69,74 +76,89 @@ const Dashboard = () => {
     }
   };
 
-  // useEffect(() => {
-  //   visitedLink(visited);
-  // }, [visited]);
+  useEffect(() => {}, [visited]);
 
-  // const visitedLink = async (visited) => {
-  //   setVisited(visited + 1);
-  //   console.log(visited);
-  // };
+  const visitedLink = async (visited) => {
+    setVisited(visited + 1);
+    console.log(visited);
+  };
   // console.log(links);
 
-  return (
-    <div className="bg-blue-100 h-full">
-      <div className="flex flex-col items-center justify-center">
-        <div className="bg-white shadow rounded lg:w-2/3  md:w-2/2 w-full px-6 m-20">
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="my-5 w-full">
-              <div className="relative flex">
-                <input
-                  type="url"
-                  name="longUrl"
-                  id="longUrl"
-                  value={longUrl}
-                  onChange={(e) => setLongUrl(e.target.value)}
-                  className="bg-gray-200 border rounded text-sm font-medium leading-none text-gray-800 py-4 w-full pl-3"
-                />
-                <div className="absolute right-0 my-2 mr-3 cursor-pointer">
-                  <button
-                    role="button"
-                    className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 px-4 py-3 w-full"
-                  >
-                    Create Short Link
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
+  if (status === "unauthenticated") {
+    return <p>Unautheticate</p>;
+  }
 
-        <div className="lg:w-1/3  md:w-1/2 w-full px-6">
-          <div className="my-5 w-full">
+  if (status === "loading") {
+    return (
+      <div className="bg-blue-100 h-full">
+        <div className="flex flex-col items-center justify-center">
+          <LinkCard />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <Navbar />
+      <div className="bg-blue-100 h-full">
+        <div className="flex flex-col items-center justify-center">
+          <div className="bg-white shadow rounded lg:w-2/3  md:w-2/2 w-full px-6 m-20">
             <form onSubmit={(e) => handleSubmit(e)}>
-              <div className="relative flex items-center justify-center">
-                <input
-                  placeholder="Search for a link..."
-                  type="url"
-                  name="longUrl"
-                  id="longUrl"
-                  onChange={(e) => setSearchLink(e.target.value)}
-                  className="bg-white border rounded text-sm font-medium leading-none text-gray-900 py-4 w-full pl-3 mt-2"
-                />
+              <div className="my-5 w-full">
+                <div className="relative flex">
+                  <input
+                    type="url"
+                    name="longUrl"
+                    id="longUrl"
+                    value={longUrl}
+                    onChange={(e) => setLongUrl(e.target.value)}
+                    className="bg-gray-200 border rounded text-sm font-medium leading-none text-gray-800 py-4 w-full pl-3"
+                  />
+                  <div className="absolute right-0 my-2 mr-3 cursor-pointer">
+                    <button
+                      role="button"
+                      className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 px-4 py-3 w-full"
+                    >
+                      Create Short Link
+                    </button>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
-        </div>
 
-        <LinkList
-          links={
-            links &&
-            links.filter((link) =>
-              link.longUrl.toLowerCase().includes(searchLink)
-            )
-          }
-          handleDeleteLink={deleteLink}
-          handleVisitedLink={visitedLink}
-        />
+          <div className="lg:w-1/3  md:w-1/2 w-full px-6">
+            <div className="my-5 w-full">
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="relative flex items-center justify-center">
+                  <input
+                    placeholder="Search for a link..."
+                    type="url"
+                    name="longUrl"
+                    id="longUrl"
+                    onChange={(e) => setSearchLink(e.target.value)}
+                    className="bg-white border rounded text-sm font-medium leading-none text-gray-900 py-4 w-full pl-3 mt-2"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <LinkList
+            links={
+              links &&
+              links.filter((link) =>
+                link.longUrl.toLowerCase().includes(searchLink)
+              )
+            }
+            handleDeleteLink={deleteLink}
+            handleVisitedLink={visitedLink}
+          />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 export default Dashboard;
