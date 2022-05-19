@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
+import { getCsrfToken } from "next-auth/react";
 
 // const validate = ({ data }) => {
 //   const router = useRouter()
@@ -20,14 +21,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const credentials = { email, password };
+    const csrfT = await getCsrfToken();
+
+    const credentials = { email, password, csrfToken: csrfT };
 
     let user = await axios.post("/api/auth/callback/credentials", credentials);
 
-    return;
-
     if (user) {
-      localStorage.setItem("user", JSON.stringify(user.data));
       return router.push("/dashboard");
     }
 

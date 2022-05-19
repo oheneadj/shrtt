@@ -3,12 +3,17 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import LinkList from "../components/LinkList";
 import Footer from "../components/Footer";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const [longUrl, setLongUrl] = useState("");
   const [links, setLinks] = useState([]);
   const [searchLink, setSearchLink] = useState("");
   const [visited, setVisited] = useState("");
+  const { data: session, status } = useSession();
+
+  console.log(session);
 
   useEffect(() => {
     const getLink = async () => {
@@ -19,7 +24,7 @@ const Dashboard = () => {
 
         // console.log(setLinks);
 
-        console.log(links);
+        // console.log(links);
       }
 
       console.log("login error");
@@ -55,10 +60,10 @@ const Dashboard = () => {
         },
       });
 
-      console.log(allLinks);
+      // console.log(allLinks);
 
       if (allLinks.status === 201) {
-        console.log(allLinks.data);
+        // console.log(allLinks.data);
         alert(`Link deleted successfully`);
 
         const newLinks = links.filter((link) => link._id !== _id);
@@ -69,15 +74,27 @@ const Dashboard = () => {
     }
   };
 
-  // useEffect(() => {
-  //   visitedLink(visited);
-  // }, [visited]);
+  useEffect(() => {}, [visited]);
 
-  // const visitedLink = async (visited) => {
-  //   setVisited(visited + 1);
-  //   console.log(visited);
-  // };
+  const visitedLink = async (visited) => {
+    setVisited(visited + 1);
+    console.log(visited);
+  };
   // console.log(links);
+
+  if (status === "unauthenticated") {
+    return <p>Unauthenticated</p>;
+  }
+
+  if (status === "loading") {
+    return (
+      <div className="bg-blue-100 h-full">
+        <div className="flex flex-col items-center justify-center">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-blue-100 h-full">
@@ -85,6 +102,7 @@ const Dashboard = () => {
         <div className="bg-white shadow rounded lg:w-2/3  md:w-2/2 w-full px-6 m-20">
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="my-5 w-full">
+              {JSON.stringify(session, null, 2)}
               <div className="relative flex">
                 <input
                   type="url"
