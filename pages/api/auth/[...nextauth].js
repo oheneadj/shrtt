@@ -44,32 +44,23 @@ export default NextAuth({
   ],
 
   callbacks: {
-    async session({ session, token }) {
-      return session;
+    jwt: {
+      // Defaults to `session.maxAge`.
+      maxAge: 60 * 60 * 24 * 30,
+      // You can define your own encode/decode functions for signing and encryption
+      async encode() {},
+      async decode() {},
     },
-    async jwt({ token, user }) {
-      return token;
+    session: {
+      // Seconds - How long until an idle session expires and is no longer valid.
+      maxAge: 30 * 24 * 60 * 60, // 30 days
+
+      // Seconds - Throttle how frequently to write to database to extend a session.
+      // Use it to limit write operations. Set to 0 to always update the database.
+      // Note: This option is ignored if using JSON Web Tokens
+      updateAge: 24 * 60 * 60, // 24 hours
     },
   },
 
   secret: "secret",
-
-  session: {
-    // Seconds - How long until an idle session expires and is no longer valid.
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-
-    // Seconds - Throttle how frequently to write to database to extend a session.
-    // Use it to limit write operations. Set to 0 to always update the database.
-    // Note: This option is ignored if using JSON Web Tokens
-    updateAge: 24 * 60 * 60, // 24 hours
-  },
-
-  jwt: {
-    // The maximum age of the NextAuth.js issued JWT in seconds.
-    // Defaults to `session.maxAge`.
-    maxAge: 60 * 60 * 24 * 30,
-    // You can define your own encode/decode functions for signing and encryption
-    async encode() {},
-    async decode() {},
-  },
 });
