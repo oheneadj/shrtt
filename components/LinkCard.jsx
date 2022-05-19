@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
-const LinkCard = (
-{  urlName,
-  longUrl,
-  shortUrl,
-  visited}) => {
+const LinkCard = ({ urlName, longUrl, shortUrl, visited}) => {
+
+    const handleCopyLink = e => {
+      navigator.clipboard.writeText(shortUrl);
+      alert(`You have copied "${shortUrl}"`);
+    }
+
+
+
   return (
           <div className="bg-white shadow rounded lg:w-2/4  md:w-2/2 w-full mt-10 p-5">
             <p className="focus:outline-none text-md font-extrabold leading-6 text-gray-800">
@@ -33,7 +37,7 @@ const LinkCard = (
             </a>
             <div className="flex flex-row items-center justify-between">
               <div className="text-gray-500 flex flex-row items-center justify-between">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy hover:text-blue-500 text-gray-500 mr-3 mt-3"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <svg onClick ={()=>handleCopyLink(shortUrl)} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy hover:text-blue-500 text-gray-500 mr-3 mt-3"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <desc>Download more icon variants from https://tabler-icons.io/i/copy</desc>
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <rect x="8" y="8" width="14" height="14" rx="2"></rect>

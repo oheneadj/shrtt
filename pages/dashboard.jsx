@@ -1,13 +1,14 @@
 import Link from "next/link";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import LinkCard from "../components/LinkCard"
+import LinkList from "../components/LinkList"
 import Footer from "../components/Footer"
 
 const Dashboard = () => {
 
   const [longUrl, setLongUrl] = useState('');
   const [links, setLinks] = useState([]);
+  const [searchLink, setSearchLink] = useState('');
 
   useEffect(() => {
 		const getLink = async()=> {
@@ -48,6 +49,10 @@ const Dashboard = () => {
     }
   }
 
+  const handleSearchLink = async (e)=>{
+    setSearchLink(e.target.value)
+  }
+
   return (
     <div className="bg-blue-100 h-full">
       <div className="flex flex-col items-center justify-center">
@@ -75,17 +80,33 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {links.map(link => 
 
-				  <LinkCard
-          id={link._id}
-					urlName={link.urlName}
-					longUrl={link.longUrl}
-					shortUrl={link.shortUrl}
-          visited={link.visited}
-					// handleDeleteNote={handleDeleteNote}
-				/>
-			)} 
+          <div className="lg:w-1/3  md:w-1/2 w-full px-6">
+            <div className="my-5 w-full">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="relative flex items-center justify-center">
+              <input
+                placeholder="Search for a link..."
+                type="url"
+                name="longUrl"
+                id="longUrl"
+                onChange={(e) => setSearchLink(e.target.value)}
+                className="bg-white border rounded text-sm font-medium leading-none text-gray-900 py-4 w-full pl-3 mt-2"
+              />
+              </div>
+              </form>
+            </div>
+          </div>
+
+
+         
+
+
+         <LinkList
+          links={links.filter((link) =>
+						link.longUrl.toLowerCase().includes(searchLink)
+					)}
+         />
 
 
       </div>
