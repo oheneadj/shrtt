@@ -3,7 +3,6 @@ import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
 
-
 // const validate = ({ data }) => {
 //   const router = useRouter()
 //   useEffect(() => {
@@ -13,30 +12,26 @@ import React, { useState } from "react";
 //   }, [])
 // };
 
-
 const Login = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const credentials = { email, password };
 
+    let user = await axios.post("/api/auth/callback/credentials", credentials);
 
-    let user = await axios.post("/api/auth/login", credentials);
+    return;
 
-
-
-    if(user){
-
-      localStorage.setItem('user', JSON.stringify(user.data));
-      return router.push("/dashboard")
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user.data));
+      return router.push("/dashboard");
     }
 
-    console.log("login error")
+    console.log("login error");
   };
 
   // const handleGetUser = async () => {
@@ -51,37 +46,35 @@ const Login = () => {
   //   console.log(user);
   // };
 
-
   return (
     <div className="bg-blue-100 h-screen">
-
-        <div className="flex flex-col items-center justify-center">
-          <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-28">
-            <p
-              tabindex="0"
-              className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800"
+      <div className="flex flex-col items-center justify-center">
+        <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-28">
+          <p
+            tabindex="0"
+            className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800"
+          >
+            Login to your account
+          </p>
+          <p
+            tabindex="0"
+            className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500"
+          >
+            Dont have an account?{" "}
+            <Link
+              href="/register"
+              className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"
             >
-              Login to your account
-            </p>
-            <p
-              tabindex="0"
-              className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500"
-            >
-              Dont have an account?{" "}
-              <Link
-                href="/register"
-                className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"
-              >
-                Register here
-              </Link>
-            </p>
+              Register here
+            </Link>
+          </p>
 
-            <div className="w-full flex items-center justify-between py-5">
-              <hr className="w-full bg-gray-400" />
+          <div className="w-full flex items-center justify-between py-5">
+            <hr className="w-full bg-gray-400" />
 
-              <hr className="w-full bg-gray-400" />
-            </div>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <hr className="w-full bg-gray-400" />
+          </div>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <div>
               <label
                 id="email"
@@ -137,11 +130,10 @@ const Login = () => {
                 Login to my account
               </button>
             </div>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
-   
+    </div>
   );
 };
 
