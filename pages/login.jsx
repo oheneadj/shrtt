@@ -51,7 +51,7 @@ const Login = () => {
   // };
 
   return (
-    <div className="bg-blue-100 h-screen">
+    <div className="bg-blue-100 h-screen pt-24">
       <div className="flex flex-col items-center justify-center">
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-28">
           <p

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Card from '../components/Card'
+import Link from "next/link";
 
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <main className="h-full flex flex-col ">
+      <main className="h-screen flex flex-col ">
         {/* Hero */}
         <div className="flex flex-row justify-between items-center h-screen bg-zinc-800 p-20">
           {/* Left */}
@@ -22,13 +23,15 @@ export default function Home() {
             <h1 className="text-7xl text-white mb-16 font-bold">Enter your Link<br/>
             -We'll <span className="underline decoration-teal-500">
               shorten<span className="text-teal-500">.</span>it </span><br/> for you.</h1>
-            
+            <Link href="/register">
             <button 
                 role="button"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 text-sm font-semibold leading-none text-white focus:outline-none bg-teal-500 border rounded hover:bg-teal-600 py-4 px-10 my-4 mb-4"
-                disabled>
+                >
               Create an account
-              </button><br/>
+              </button>
+              </Link>
+              <br/>
             <small className="text-gray-400">By signing up, I agree to shorten.it <span className="underline decoration-teal-500">Privacy Policy</span> and <span className="underline decoration-teal-500">Terms of Service</span></small>
           </div>
 
@@ -38,14 +41,14 @@ export default function Home() {
           </div>
         </div>
         {/* Services */}
-        <div className="flex flex-col h-screen p-20">
+        <div className="flex flex-col h-screen items-center p-20">
           {/* card */}
           <div className ="flex">
             <h2 className="text-3xl font-medium m-10">What Are The Advantages Of Using Shorten.it</h2>
             <p className="m-10 text-gray-500">This url shortener platfprm has advantages that most other platforms do not have. Thi is intended so that user may feel comfortable using this platform</p>
           </div>
           <div className="flex">
-          <Card img="/logo.png" title="Its free forever" description="This is a description if the card" />
+          <Card img="/logo.png" title="Its free forever" description="There are hidden charges invloved with usinf our platform. We provide the best url ssssshortennerrrrrrrrrrrrrrrrrrrrrrrr" />
             <Card img="/logo.png" title="This is a card head" description="This is a description if the card"/>
             <Card img="/logo.png" title="This is a card head" description="This is a description if the card"/>
           </div>

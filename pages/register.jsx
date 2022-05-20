@@ -11,10 +11,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState("False")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading("True")
     const credentials = { name, email, password };
 
 
@@ -22,7 +24,7 @@ const Register = () => {
 
 
     if(user){
-
+      setIsLoading("False")
       return router.push("/login")
     }
 
@@ -31,10 +33,10 @@ const Register = () => {
 
 
   return (
-    <div className="bg-blue-100">
+    <div className="h-screen bg-blue-100 pt-24">
     <div >
       <div className="flex flex-col items-center justify-center">
-      <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-16">
+      <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10  mt-16">
           <p
             tabIndex="0"
             className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">
@@ -122,12 +124,17 @@ const Register = () => {
             </div>
           </div>
           <div className="mt-8">
-            <button
-              role="button"
-              className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
-            >
+          {isLoading === "False" ?<button
+                role="button"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
+              >
               Create my account
-            </button>
+              </button> : <button 
+                role="button"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-400 border rounded hover:bg-indigo-400 py-4 w-full"
+                disabled>
+              Please wait...
+              </button>}
           </div>
           </form>
         </div>
