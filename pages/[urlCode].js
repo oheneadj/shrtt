@@ -4,16 +4,17 @@ import axios from "axios";
 
 const UrlCode = ({ data }) => {
   const router = useRouter();
-
-  useEffect(() => {
-    redirect();
-  }, []);
-
   const redirect = () => {
     if (data) {
       return router.push(data.longUrl);
     }
   };
+
+  useEffect(() => {
+    redirect();
+  }, []);
+
+
 };
 
 export async function getServerSideProps({ params }) {

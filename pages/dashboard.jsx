@@ -15,7 +15,6 @@ const Dashboard = () => {
   const [visited, setVisited] = useState("");
   const { data: session, status } = useSession();
 
-  console.log(session);
 
   useEffect(() => {
     const getLink = async () => {
