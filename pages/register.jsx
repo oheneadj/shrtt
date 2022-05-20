@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
+import DashboardNav from "../components/Navbar/DashboardNav";
 
 
 
@@ -33,6 +34,9 @@ const Register = () => {
 
 
   return (
+    <>
+    <DashboardNav />
+   
     <div className="h-screen bg-blue-100 pt-24">
     <div >
       <div className="flex flex-col items-center justify-center">
@@ -141,7 +145,7 @@ const Register = () => {
       </div>
     </div>
     </div>
-
+    </>
   );
 };
 

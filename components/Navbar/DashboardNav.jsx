@@ -2,14 +2,9 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import Image from  'next/image'
 import styles from "./Navbar.module.css";
-const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
-];
 
-const Navbar = () => {
+
+const DashboardNavbar = () => {
   const { data: session, status } = useSession();
   const button = status;
   console.log(button);
@@ -23,19 +18,7 @@ const Navbar = () => {
         </div>
 
         {/* Links */}
-        <div>
-          <ul className="flex flex-row justify-between ">
-            <a href="#" className="mx-6">
-              <li>Features</li>
-            </a>
-            <a href="#" className="mx-6">
-              <li>Use Cases</li>
-            </a>
-            <a href="#" className="mx-6">
-              <li>Statistics</li>
-            </a>
-          </ul>
-        </div>
+        
         {/* Button */}
         <div>
           {button === "unauthenticated" ? (
@@ -55,4 +38,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;

@@ -3,6 +3,8 @@ import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
 import { getCsrfToken } from "next-auth/react";
+import DashboardNav from "../components/Navbar/DashboardNav";
+
 
 // const validate = ({ data }) => {
 //   const router = useRouter()
@@ -51,6 +53,8 @@ const Login = () => {
   // };
 
   return (
+    <>
+    <DashboardNav />
     <div className="bg-blue-100 h-screen pt-24">
       <div className="flex flex-col items-center justify-center">
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-28">
@@ -146,6 +150,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
