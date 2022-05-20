@@ -34,6 +34,7 @@ const LinkCard = ({
         onClick={() => handleVisitedLink(visited)}
         href={shortUrl}
         target="_blank"
+        rel="noreferrer" 
         tabIndex="0"
         className="focus:outline-none text-sm font-medium leading-none hover:text-blue-500 text-red-500"
       >
@@ -44,7 +45,7 @@ const LinkCard = ({
           <svg
             onClick={() => handleCopyLink(shortUrl)}
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-copy hover:text-blue-500 text-gray-500 mr-3 mt-3"
+            className="icon icon-tabler icon-tabler-copy hover:text-blue-500 text-gray-500 mr-3 mt-3"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -65,7 +66,7 @@ const LinkCard = ({
           <svg
             onClick={() => handleDeleteLink(_id)}
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-trash hover:text-red-500 text-gray-500 mr-3 mt-3"
+            className="icon icon-tabler icon-tabler-trash hover:text-red-500 text-gray-500 mr-3 mt-3"
             width="24"
             height="24"
             viewBox="0 0 24 24"

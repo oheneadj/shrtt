@@ -36,12 +36,12 @@ const Register = () => {
       <div className="flex flex-col items-center justify-center">
       <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-16">
           <p
-            tabindex="0"
+            tabIndex="0"
             className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">
             Register an account
           </p>
           <p
-            tabindex="0"
+            tabIndex="0"
             className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500"
           >
             Already have an account?{" "}
@@ -92,7 +92,7 @@ const Register = () => {
           </div>
           <div className="mt-6  w-full">
             <label
-              for="pass"
+              htmlFor="password"
               className="text-sm font-medium leading-none text-gray-800"
             >
               Password

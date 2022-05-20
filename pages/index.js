@@ -27,7 +27,7 @@ export default function Home() {
 
           {/* Right */}
           <div>
-            <img src="#" alt="this is a header image" />
+            <Image src="#" alt="this is a header image" />
           </div>
         </div>
         {/* Services */}
