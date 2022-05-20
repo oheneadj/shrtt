@@ -3,10 +3,13 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Card from '../components/Card'
 import Link from "next/link";
+import Navbar from "../components/Navbar/Navbar";
 
 
 export default function Home() {
   return (
+    <>
+    <Navbar/>
     <div className="h-full flex flex-col bg-blue-100">
       <Head>
         <title>Linkly | Home - The Shorter The Better</title>
@@ -55,5 +58,6 @@ export default function Home() {
         </a>
       </footer>
     </div>
+</>
   )
 }
