@@ -18,12 +18,9 @@ const LinkCard = ({
   return (
     <div className="bg-white shadow rounded lg:w-2/4  md:w-2/2 w-full mt-10 p-5">
       <p className="focus:outline-none text-md font-extrabold leading-6 text-gray-800">
-        {urlName}
+        {/* {urlName} */}
       </p>
-      <p
-      
-        className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500"
-      >
+      <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
         {longUrl}{" "}
       </p>
 
@@ -34,7 +31,7 @@ const LinkCard = ({
         onClick={() => handleVisitedLink(visited)}
         href={shortUrl}
         target="_blank"
-        rel="noreferrer" 
+        rel="noreferrer"
         tabIndex="0"
         className="focus:outline-none text-sm font-medium leading-none hover:text-blue-500 text-red-500"
       >
@@ -90,7 +87,7 @@ const LinkCard = ({
           <div className=" mt-2 mr-3 cursor-pointer">
             <button
               role="button"
-              className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 px-4 py-3 w-full"
+              className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-700 text-sm font-semibold leading-none text-white focus:outline-none bg-teal-700 border rounded hover:bg-teal-600 px-4 py-3 w-full"
             >
               {visited} Clicks
             </button>

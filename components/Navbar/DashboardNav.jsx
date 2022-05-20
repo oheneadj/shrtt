@@ -1,8 +1,7 @@
 import React from "react";
 import { useSession } from "next-auth/react";
-import Image from  'next/image'
+import Image from "next/image";
 import styles from "./Navbar.module.css";
-
 
 const DashboardNavbar = () => {
   const { data: session, status } = useSession();
@@ -13,21 +12,24 @@ const DashboardNavbar = () => {
       <div className="flex flex-row items-center justify-between px-12 py-4">
         {/* Logo */}
         <div>
-          <h1 className="text-black font-bold"><span className="underline decoration-teal-500">
-              shorten<span className="text-teal-500">.</span>it </span></h1>
+          <h1 className="text-black font-bold">
+            <span className="underline decoration-teal-500">
+              shorten<span className="text-teal-500">.</span>it{" "}
+            </span>
+          </h1>
         </div>
 
         {/* Links */}
-        
+
         {/* Button */}
         <div>
           {button === "unauthenticated" ? (
-            <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 px-4 py-3 w-full">
+            <button className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-700 text-sm font-semibold leading-none text-white focus:outline-none bg-teal-700 border rounded hover:bg-teal-600 px-4 py-3 w-full">
               {" "}
               Login
             </button>
           ) : (
-            <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 px-4 py-3 w-full">
+            <button className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-700 text-sm font-semibold leading-none text-white focus:outline-none bg-teal-700 border rounded hover:bg-teal-600 px-4 py-3 w-full">
               {" "}
               Logout
             </button>
