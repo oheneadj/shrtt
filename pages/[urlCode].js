@@ -22,7 +22,7 @@ export async function getServerSideProps({ params }) {
 
   try {
     let { data } = await axios.get(
-      `http://localhost:3000/api/url/${params.urlCode}`
+      `https://link-ly.vercel.app/api/url/${params.urlCode}`
     );
 
     return {
