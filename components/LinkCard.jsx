@@ -21,7 +21,7 @@ const LinkCard = ({
         {urlName}
       </p>
       <p
-        tabindex="0"
+      
         className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500"
       >
         {longUrl}{" "}
@@ -34,7 +34,7 @@ const LinkCard = ({
         onClick={() => handleVisitedLink(visited)}
         href={shortUrl}
         target="_blank"
-        tabindex="0"
+        tabIndex="0"
         className="focus:outline-none text-sm font-medium leading-none hover:text-blue-500 text-red-500"
       >
         {shortUrl}{" "}
@@ -48,11 +48,11 @@ const LinkCard = ({
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <desc>
               Download more icon variants from https://tabler-icons.io/i/copy
@@ -69,11 +69,11 @@ const LinkCard = ({
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <line x1="4" y1="7" x2="20" y2="7"></line>

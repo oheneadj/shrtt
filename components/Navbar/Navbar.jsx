@@ -1,5 +1,6 @@
 import React from "react";
 import { useSession } from "next-auth/react";
+import Image from  'next/image'
 import styles from "./Navbar.module.css";
 const navigation = [
   { name: "Product", href: "#" },
@@ -17,7 +18,7 @@ const Navbar = () => {
       <div className="flex flex-row items-center justify-between px-12 py-4">
         {/* Logo */}
         <div>
-          <img className="w-10" src="/logo.png" alt="Linkly Logo" />
+          <Image className="w-10" src="/logo.png" alt="Linkly Logo" />
         </div>
 
         {/* Links */}
