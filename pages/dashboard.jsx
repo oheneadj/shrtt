@@ -60,17 +60,22 @@ const Dashboard = () => {
 
     // }
 
-    if (url.trim.length === '') return setError("");
+    // if (url.trim.length === '') return setError("");
 
-    let shortLink = await axios.post("/api/url/shortener", url);
+    try {
+      let shortLink = await axios.post("/api/url/shortener", url);
 
-    if (shortLink.status === 201) {
-      setIsLoading("False")
-      setLongUrl("");
-      // console.log(shortLink.data)
+      if (shortLink.status === 201) {
+        setIsLoading("False")
+        setLongUrl("");
+        // console.log(shortLink.data)
+      }
+    } catch (error) {
+      console.log(error)
     }
-  };
 
+   
+  }
   const deleteLink = async (_id) => {
     try {
       console.log(_id);
@@ -103,6 +108,7 @@ const Dashboard = () => {
     console.log(visited);
   };
   // console.log(links);
+
 
   if (status === "unauthenticated") {
     return <p>Unautheticate</p>;

@@ -6,11 +6,18 @@ export default async function handler(req, res) {
   await dbConnect();
 
   //find  shortUrl
-
   if (req.method === "GET") {
-    let links = await URL.find({});
+  try{
+   
+      let links = await URL.find({});
+  
+      res.status(201).json(links);
+  }
+  catch(error){
+    console.log(error)
+  }
+  
 
-    res.status(201).json(links);
   } else {
     res.json({ msg: `${req.method} is not an accepted method` });
   }
