@@ -18,10 +18,10 @@ export default function Home() {
         <div className="flex flex-row justify-between items-center h-screen bg-zinc-800 p-20">
           {/* Left */}
           <div>
-            <p className="text-xl text-gray-400 mb-6">---Get your url short</p> 
-            <h1 className="text-8xl text-white mb-16 font-bold">Enter your Link<br/>
+            <p className="text-xl text-gray-400 mb-6">-Get your url short</p> 
+            <h1 className="text-7xl text-white mb-16 font-bold">Enter your Link<br/>
             -We'll <span className="underline decoration-teal-500">
-              shorten it </span><br/> for you.</h1>
+              shorten<span className="text-teal-500">.</span>it </span><br/> for you.</h1>
             
             <button 
                 role="button"
@@ -38,14 +38,14 @@ export default function Home() {
           </div>
         </div>
         {/* Services */}
-        <div className="flex flex-row">
+        <div className="flex flex-col h-screen p-20">
           {/* card */}
-          <div>
-            <h2>What Are The Advantages Of Using Shorten.it</h2>
-            <p>This url shortener platfprm has advantages that most other platforms do not have. Thi is intended so that user may feel comfortable using this platform</p>
+          <div className ="flex">
+            <h2 className="text-3xl font-medium m-10">What Are The Advantages Of Using Shorten.it</h2>
+            <p className="m-10 text-gray-500">This url shortener platfprm has advantages that most other platforms do not have. Thi is intended so that user may feel comfortable using this platform</p>
           </div>
-          <div>
-          <Card img="/logo.png" title="This is a card head" description="This is a description if the card" />
+          <div className="flex">
+          <Card img="/logo.png" title="Its free forever" description="This is a description if the card" />
             <Card img="/logo.png" title="This is a card head" description="This is a description if the card"/>
             <Card img="/logo.png" title="This is a card head" description="This is a description if the card"/>
           </div>
