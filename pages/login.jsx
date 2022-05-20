@@ -16,10 +16,13 @@ import { getCsrfToken } from "next-auth/react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState("False")
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsLoading("True")
 
     const csrfT = await getCsrfToken();
 
@@ -28,6 +31,7 @@ const Login = () => {
     let user = await axios.post("/api/auth/callback/credentials", credentials);
 
     if (user) {
+      setIsLoading("False")
       return router.push("/dashboard");
     }
 
@@ -123,12 +127,20 @@ const Login = () => {
               </div>
             </div>
             <div className="mt-8">
-              <button
+{/* Set button to loading state */}
+            {isLoading === "False" ?<button
                 role="button"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
               >
-                Login to my account
-              </button>
+              Login to my account
+              </button> : <button 
+                role="button"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-400 border rounded hover:bg-indigo-400 py-4 w-full"
+                disabled>
+              Please wait...
+              </button>}
+
+              
             </div>
           </form>
         </div>

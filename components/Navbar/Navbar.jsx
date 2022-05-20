@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="flex flex-row items-center justify-between px-12 py-4">
         {/* Logo */}
         <div>
-          <Image className="w-10" src="/logo.png" alt="Linkly Logo" />
+          <Image className="w-10" src="/logo.png" alt="Linkly Logo" width="50px" height="50px" />
         </div>
 
         {/* Links */}
