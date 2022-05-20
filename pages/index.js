@@ -33,12 +33,17 @@ export default function Home() {
           </div>
 
           {/* Right */}
-         
+          <div>
+            <Image src="/phone1.png" width="650" height="500" alt="this is a header image" />
+          </div>
         </div>
         {/* Services */}
         <div className="flex flex-row">
           {/* card */}
-          
+          <div>
+            <h2>What Are The Advantages Of Using Shorten.it</h2>
+            <p>This url shortener platfprm has advantages that most other platforms do not have. Thi is intended so that user may feel comfortable using this platform</p>
+          </div>
           <div>
           <Card img="/logo.png" title="This is a card head" description="This is a description if the card" />
             <Card img="/logo.png" title="This is a card head" description="This is a description if the card"/>
