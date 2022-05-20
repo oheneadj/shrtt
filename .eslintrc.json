@@ -1,9 +1,9 @@
 {
   "extends": "next/core-web-vitals",
   "plugins": ["react-hooks"],
-  "rules":{
+  "rules": {
     "react/jsx-key": "off",
-    "react-hooks/exhaustive-deps": 0,
+    "react-hooks/exhaustive-deps": 0
   },
-    "rules":{"react/no-unescaped-entities":0}
+  "rules": { "react/no-unescaped-entities": 0 }
 }
