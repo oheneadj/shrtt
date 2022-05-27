@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   //Create a new ShortURL
   if (req.method === "POST") {
     const { longUrl } = req.body;
-    const baseUrl = "https://shrtt.in";
+    const baseUrl = "shrtt.in";
 
     //Check to see if baseURL is a valid URL
     if (!validUrl.isUri(baseUrl)) {
