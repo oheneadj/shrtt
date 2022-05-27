@@ -15,9 +15,10 @@ export default async function handler(req, res) {
     const baseUrl = "shrtt.in";
 
     //Check to see if baseURL is a valid URL
-    if (!validUrl.isUri(baseUrl)) {
-      return res.status(401).json({ msg: "Invalid URL" });
-    }
+    //if (!validUrl.isUri(baseUrl)) {
+    //  return res.status(401).json({ msg: "Invalid URL" });
+    //}
+    
     //Create URL Code
     const urlCode = nanoid(6);
 
