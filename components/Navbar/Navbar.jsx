@@ -10,7 +10,7 @@ const Navbar = () => {
   console.log(button);
   return (
     <div>
-      <div className="flex flex-row items-center justify-between px-12 py-4">
+      <div className="flex items-center justify-between px-12 py-4">
         {/* Logo */}
         <div>
           <Link href={"/index"}>

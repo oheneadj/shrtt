@@ -18,24 +18,27 @@ export default async function handler(req, res) {
     console.log("POST");
 
     console.log(email);
+    console.log(password);
 
-    if (!email || !password) return res.status(400).json({error:"Please add all fields"})
+    if (!email || !password) return res.status(400).json({message:"Please add all fields"})
 
+    
     // Check for user email
     const user = await User.findOne({ email: email });
-
-    if (user && (await bcrypt.compare(password, user.password))) {             
-
+    
+    if (user && (await bcrypt.compare(password, user.password))) {
+      
       return  res.status(200).json({ 
         _id:user.id,
         name:user.name,
         email:user.email,
         token: generateToken(user.id)
-       });}else{
-      res.status(400).json({error:"invalid user credentials"})
+       });}
+       else{
+      res.status(400).json({message:"Invalid email and/or password"})
     }
    
   } else {
-    res.status(405).json({ error: `${req.method} not allowed` });
+    res.status(405).json({ message: `${req.method} not allowed` });
   }
 }

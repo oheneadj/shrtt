@@ -4,8 +4,8 @@ import Image from "next/image";
 import styles from "./Navbar.module.css";
 
 const DashboardNavbar = () => {
-  const { data: session, status } = useSession();
-  const button = status;
+
+  const button = "";
   console.log(button);
   return (
     <div>

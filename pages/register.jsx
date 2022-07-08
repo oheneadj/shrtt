@@ -10,22 +10,34 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState("False");
+  const [error, setError] = useState("False");
+  const [msg, setMsg] = useState("")
 
+  // Register User 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+// Set Button to loading status
     setIsLoading("True");
     const credentials = { name, email, password };
 
-    let user = await axios.post("/api/auth/register", credentials);
+// Try to register the user with axios using the credentials
+try {
+  const user = await axios.post("/api/auth/register", credentials);
 
-    if (user) {
-      setIsLoading("False");
-      return router.push("/login");
-    }
+  // Check if user was successfully registered
+  if (user) {
 
-    console.log("login error");
-  };
+    setIsLoading("False");
+    // Route to login page if user was created
+    return router.push("/login");
+  }
+} catch (error) {
+  setMsg(error.response.data.message)
+  // Set Button loading status to false
+  setIsLoading("False");
+  // Display error to user
+  setError("True");
+}};
 
   return (
     <>
@@ -33,8 +45,11 @@ const Register = () => {
 
       <div className="h-screen bg-blue-100 pt-24">
         <div>
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex px-3 flex-col items-center justify-center">
             <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10  mt-16">
+              {/* Display error message when user tries to register */}
+            {error === "True" ? (<span className="bg-red-500 text-white p-2 px-3 my-3 inline-block rounded">{msg}</span>)
+              :("")}
               <p
                 tabIndex="0"
                 className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800"

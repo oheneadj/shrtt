@@ -16,7 +16,7 @@ const LinkCard = ({
   };
 
   return (
-    <div className="bg-white shadow rounded lg:w-2/4  md:w-2/2 w-full mt-10 p-5">
+    <div className="bg-white shadow rounded lg:w-2/4  md:w-2/2 w-full mt-10 m p-5">
       <p className="focus:outline-none text-md font-extrabold leading-6 text-gray-800">
         {/* {urlName} */}
       </p>

@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const userExists = await User.findOne({ email: email });
 
     if (userExists)
-      return res.status(400).json({ msg: "Email already in use" });
+      return res.status(400).json({ message: "Email already in use" });
 
     //Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -41,9 +41,9 @@ export default async function handler(req, res) {
         email: user.email,
       });
     } else {
-      res.status(400).json({ error: "Server error" });
+      res.status(400).json({ message: "Server error" });
     }
   } else {
-    res.status(405).json({ error: `${req.method} not allowed` });
+    res.status(405).json({ message: `${req.method} not allowed` });
   }
 }

@@ -2,61 +2,54 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
-import { getCsrfToken } from "next-auth/react";
 import DashboardNav from "../components/Navbar/DashboardNav";
-
-// const validate = ({ data }) => {
-//   const router = useRouter()
-//   useEffect(() => {
-//       if (data) {
-//           return router.push(data.longUrl)
-//       }
-//   }, [])
-// };
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState("False");
-  const router = useRouter();
+  const [error, setError] = useState("False");
+  const [msg, setMsg] = useState("")
 
+  const router = useRouter();
+// Login User 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Set button to loading status
     setIsLoading("True");
 
-    const csrfT = await getCsrfToken();
+    const credentials = { email, password };
+// Try to register the user with axios using the credentials
+    try {
+      const user = await axios.post("/api/auth/login", credentials);
 
-    const credentials = { email, password, csrfToken: csrfT };
-
-    let user = await axios.post("/api/auth/callback/credentials", credentials);
-
-    if (user) {
+ // Check if user was successfully registered
+      if (user) {
+        // Set button loading status to false
+        setIsLoading("False");
+        // Route to dashboard page if user was created
+        return router.push("/dashboard");
+      }   
+    } catch (error) {
+      // Get error message from server
+      setMsg(error.response.data.message)
+      // Set Button loading status to false
       setIsLoading("False");
-      return router.push("/dashboard");
+      // Display error to user
+      setError("True");
     }
-
-    console.log("login error");
   };
-
-  // const handleGetUser = async () => {
-  //   const user = await axios.get("/api/user");
-
-  //   console.log(user);
-  // };
-
-  // const handleLogOut = async () => {
-  //   const user = await axios.get("/api/auth/logout");
-
-  //   console.log(user);
-  // };
 
   return (
     <>
       <DashboardNav />
-      <div className="bg-blue-100 h-screen pt-24">
-        <div className="flex flex-col items-center justify-center">
-          <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-28">
+      <div className="bg-blue-100 h-screen pt-15">
+        <div className="flex px-3 flex-col items-center justify-center">
+          
+          <div className="bg-white shadow rounded sm:mx-10 lg:w-1/3  md:w-1/2 w-full p-10 m-28">
+          {error === "True" ? (<span className="bg-red-500 text-white p-2 px-3 my-3 inline-block rounded">{msg}</span>)
+          :("")}
             <p className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">
               Login to your account
             </p>
@@ -132,7 +125,7 @@ const Login = () => {
                     role="button"
                     className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-700 text-sm font-semibold leading-none text-white focus:outline-none bg-teal-700 border rounded hover:bg-teal-600 py-4 w-full"
                   >
-                    Login to my account
+                    Login
                   </button>
                 ) : (
                   <button
