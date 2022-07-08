@@ -5,8 +5,8 @@ import styles from "./Navbar.module.css";
 import Link from "next/link";
 
 const Navbar = () => {
-  const { data: session, status } = useSession();
-  const button = status;
+  
+  const button = "";
   console.log(button);
   return (
     <div>

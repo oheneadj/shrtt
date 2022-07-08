@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className=" flex flex-col bg-blue-100">
+      <div className=" flex flex-col w-fit bg-blue-100">
         <Head>
-          <title>Shorten.it | Home - The Shorter The Better</title>
+          <title>Shrtt.in | Home - The Shorter, The Better</title>
           <meta
             name="description"
             content="Modern URL Shortener, created with you in mind"
@@ -19,20 +19,18 @@ export default function Home() {
           <link rel="icon" href="/logo.png" />
         </Head>
 
-        <main className="h-screen flex flex-col ">
+        <main className="h-screen">
           {/* Hero */}
-          <div className="flex flex-row justify-between items-center h-screen bg-zinc-800 p-20">
+          <div className="flex justify-between items-center w-fit bg-zinc-800 p-8">
             {/* Left */}
             <div>
-              <p className="text-xl text-gray-400 mb-6">-Get your url short</p>
+              <p className="text-l text-gray-400 mb-6">The Shorter, The Better</p>
               <h1 className="text-7xl text-white mb-16 font-bold">
-                Enter your Link
-                <br />
-                -We'll{" "}
+                Premium URL Shortener for free with
+                {" "}
                 <span className="underline decoration-teal-500">
-                  shorten<span className="text-teal-500">.</span>it{" "}
+                  shrtt<span className="text-teal-500">.</span>in{" "}
                 </span>
-                <br /> for you.
               </h1>
               <Link href="/register">
                 <button
@@ -66,7 +64,6 @@ export default function Home() {
             </div>
           </div>
         </main>
-
         <Footer />
       </div>
     </>
