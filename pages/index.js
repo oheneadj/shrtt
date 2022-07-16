@@ -19,9 +19,9 @@ export default function Home() {
           <link rel="icon" href="/logo.png" />
         </Head>
 
-        <main className="h-screen">
+        <main className="">
           {/* Hero */}
-          <div className="flex justify-between items-center w-fit bg-zinc-800 p-8">
+          <div className="flex justify-between items-center w-fit h-screen bg-zinc-800 p-8">
             {/* Left */}
             <div>
               <p className="text-l text-gray-400 mb-6">The Shorter, The Better</p>

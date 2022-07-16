@@ -3,6 +3,9 @@ import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
 import DashboardNav from "../components/Navbar/DashboardNav";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +13,11 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState("False");
   const [error, setError] = useState("False");
   const [msg, setMsg] = useState("")
+  const {user, authorized, isLoggedIn} = useContext(UserContext);
+
+  console.log(user);
+  console.log(authorized);
+
 
   const router = useRouter();
 // Login User 
@@ -28,12 +36,17 @@ const Login = () => {
       if (user) {
         // Set button loading status to false
         setIsLoading("False");
+        //Set user details
+        console.log(user.data.name);
+
+        isLoggedIn({id:user.data._id, name:user.data.name, email:user.data.email});
+
         // Route to dashboard page if user was created
         return router.push("/dashboard");
       }   
     } catch (error) {
       // Get error message from server
-      setMsg(error.response.data.message)
+      setMsg(error.response.message);
       // Set Button loading status to false
       setIsLoading("False");
       // Display error to user

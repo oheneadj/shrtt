@@ -3,18 +3,33 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import LinkList from "../components/LinkList";
 import Footer from "../components/Footer";
-// import { useSession } from "next-auth/react";
-// import { useRouter } from "next/router";
-// import LinkCard from "../components/LinkCard";
+import { useRouter } from "next/router";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
 import DashboardNav from "../components/Navbar/DashboardNav";
 
 const Dashboard = () => {
+
+  useEffect(() => {
+    if(authorized === ""){
+      router.push("/login");
+    }
+  }, [])
+
+
   const [longUrl, setLongUrl] = useState("");
   const [links, setLinks] = useState([]);
   const [searchLink, setSearchLink] = useState("");
   const [visited, setVisited] = useState("");
   const [isLoading, setIsLoading] = useState("False");
-  // const [error, setError] = useState("hidden");
+  const router = useRouter();
+  const {user, authorized, isLoggedIn} = useContext(UserContext);
+
+
+//check if user us logged in
+
+
+
 
   useEffect(() => {
     const getLink = async () => {
@@ -22,8 +37,6 @@ const Dashboard = () => {
 
       if (allLinks) {
         setLinks(allLinks.data);
-
-        console.log(setLinks);
 
         // console.log(links);
       }
